@@ -1,5 +1,7 @@
 use std::collections::HashSet;
 
+type DistanceVec<'a> = Vec<((&'a Point, &'a Point), f64)>;
+
 fn main() {
     let input = include_str!("../input/input.txt");
     let points = input.lines().map(Point::from).collect::<Vec<_>>();
@@ -18,7 +20,7 @@ fn main() {
     println!("part 2: {}", part2(&points, &distances));
 }
 
-fn part1(distances: &Vec<((&Point, &Point), f64)>) -> usize {
+fn part1(distances: &DistanceVec) -> usize {
     let mut network = Network::new();
 
     for i in 0..1000 {
@@ -32,7 +34,7 @@ fn part1(distances: &Vec<((&Point, &Point), f64)>) -> usize {
     sizes.iter().take(3).product()
 }
 
-fn part2(points: &Vec<Point>, distances: &Vec<((&Point, &Point), f64)>) -> usize {
+fn part2(points: &Vec<Point>, distances: &DistanceVec) -> usize {
     let mut network = Network::new();
 
     let mut i = 0;
